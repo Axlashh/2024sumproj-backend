@@ -10,10 +10,7 @@ import java.util.Date;
 
 @TableName("sys_user")
 @Data
-public class SysUserEntity  extends BaseQuery implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
-
+public class SysUserEntity extends BaseQuery implements Serializable {
     private String userId; // 用户id
     private String userName; // 用户名
     private String password; // 用户密码

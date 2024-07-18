@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+@MapperScan("edu.njust.back_end.modules.**.dao")
 public class BackEndApplication {
 
     public static void main(String[] args) {

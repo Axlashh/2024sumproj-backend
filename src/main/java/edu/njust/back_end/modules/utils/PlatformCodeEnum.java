@@ -1,7 +1,7 @@
 package edu.njust.back_end.modules.utils;
 
 /**
- * 包装类用的枚举量
+ * 网络请求包装类用的枚举量
  */
 public enum PlatformCodeEnum {
     SUCCESS(0, "成功响应"),
