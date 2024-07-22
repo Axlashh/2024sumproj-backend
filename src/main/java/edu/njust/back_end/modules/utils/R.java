@@ -11,8 +11,6 @@ import java.util.Date;
  */
 @Data
 public class R<T> implements Serializable {
-    private static final long serialVersionUID = 1L;
-
     @ApiModelProperty("返回状态(OK:成功; ERROR:失败)")
     private Status status;
 

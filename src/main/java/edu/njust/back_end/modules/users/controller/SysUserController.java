@@ -16,6 +16,7 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,6 +37,12 @@ public class SysUserController {
     @Autowired
     DoctorDao doctorDao;
 
+    @Autowired
+    JwtTokenUtil jwtTokenUtil;
+
+    @Value("${jwt.tokenHead}")
+    String tokenHead;
+
     @PostMapping("/login")
     public R<?> login(@RequestBody LoginForm loginForm, HttpServletRequest request) {
         Subject subject = ShiroUtil.getSubject();
@@ -51,7 +58,9 @@ public class SysUserController {
         } catch (Exception e) {
             return R.error("未知错误");
         }
-        return R.ok();
+        //登录成功，发放一个jwt
+        String token = tokenHead + jwtTokenUtil.generateToken((SysUserEntity) subject.getPrincipal());
+        return R.ok(token);
     }
 
     /**
@@ -95,7 +104,7 @@ public class SysUserController {
         return R.ok();
     }
 
-    @GetMapping("/")
+    @GetMapping("/33")
     public R<?> ii() {
         return R.ok();
     }
