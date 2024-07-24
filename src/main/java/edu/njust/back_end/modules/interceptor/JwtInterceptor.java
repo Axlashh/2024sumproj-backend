@@ -15,6 +15,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import java.util.HashMap;
 import java.util.Map;
 
+import static edu.njust.back_end.config.ShiroConfig.setUserName;
+
 @Component
 public class JwtInterceptor implements HandlerInterceptor {
     @Autowired
@@ -34,6 +36,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         if (header != null && header.startsWith(tokenHead)) {
             String token = header.substring(tokenHead.length());
             String userName = jwtTokenUtil.getUserNameFromToken(token);
+            setUserName(userName);
             //如果jwt没问题且没过期则放行
             if (userName != null && !jwtTokenUtil.isTokenExpired(token)) {
                 return true;

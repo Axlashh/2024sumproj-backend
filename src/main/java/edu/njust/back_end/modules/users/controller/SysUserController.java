@@ -1,7 +1,10 @@
 package edu.njust.back_end.modules.users.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import edu.njust.back_end.modules.shiro.LoginToken;
+import edu.njust.back_end.modules.sys.entity.MenuEntity;
+import edu.njust.back_end.modules.sys.service.MenuService;
 import edu.njust.back_end.modules.users.dao.DoctorDao;
 import edu.njust.back_end.modules.users.dao.PatientDao;
 import edu.njust.back_end.modules.users.dao.SysUserDao;
@@ -13,20 +16,20 @@ import edu.njust.back_end.modules.utils.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Slf4j
 @RestController
-public class SysUserController {
+@RequestMapping("/user")
+public class SysUserController extends AbstractController {
 
     @Autowired
     SysUserDao sysUserDao;
@@ -36,6 +39,9 @@ public class SysUserController {
 
     @Autowired
     DoctorDao doctorDao;
+
+    @Autowired
+    MenuService menuService;
 
     @Autowired
     JwtTokenUtil jwtTokenUtil;
@@ -58,6 +64,11 @@ public class SysUserController {
         } catch (Exception e) {
             return R.error("未知错误");
         }
+        SysUserEntity user = (SysUserEntity) subject.getPrincipal();
+        boolean oo = subject.isAuthenticated();
+        String sessionId = subject.getSession().getId().toString();
+        JSONObject jo = new JSONObject();
+        jo.put("JSESSIONID", sessionId);
         //登录成功，发放一个jwt
         String token = tokenHead + jwtTokenUtil.generateToken((SysUserEntity) subject.getPrincipal());
         return R.ok(token);
@@ -102,6 +113,19 @@ public class SysUserController {
             patientDao.insert(patient);
         }
         return R.ok();
+    }
+
+    @GetMapping("/info")
+    public R<?> getInfo() {
+        return R.ok();
+    }
+
+    @GetMapping("/authmenu")
+    public R<?> getAuthmenu() {
+        SysUserEntity user = getUser();
+        if (user == null) return R.error();
+        List<MenuEntity> menuEntityList = menuService.getMenuListByUserId(user.getUserId());
+        return R.ok(menuEntityList);
     }
 
     @GetMapping("/33")
