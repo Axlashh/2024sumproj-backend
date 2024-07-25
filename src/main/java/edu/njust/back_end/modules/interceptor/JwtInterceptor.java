@@ -45,6 +45,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         Map<String, Object> map = new HashMap<>();
         map.put("status", R.Status.ERROR);
         map.put("message", "请先登录!");
+        map.put("code", 50014);
         String json = new ObjectMapper().writeValueAsString(map);
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(json);

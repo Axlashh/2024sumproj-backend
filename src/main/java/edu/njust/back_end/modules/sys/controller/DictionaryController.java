@@ -2,6 +2,7 @@ package edu.njust.back_end.modules.sys.controller;
 
 import edu.njust.back_end.modules.sys.entity.DictionaryEntity;
 import edu.njust.back_end.modules.sys.service.DictionaryService;
+import edu.njust.back_end.modules.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +22,9 @@ public class DictionaryController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<DictionaryEntity>> getList() {
+    public R<?> getList() {
         List<DictionaryEntity> dictionaries = dictionaryService.getAllDictionaries();
-        return ResponseEntity.ok(dictionaries);
+        return R.ok(dictionaries);
     }
 
     // 如果需要，根据业务需求添加更多的查询方法

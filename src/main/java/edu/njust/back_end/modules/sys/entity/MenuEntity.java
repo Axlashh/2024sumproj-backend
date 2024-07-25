@@ -1,6 +1,7 @@
 package edu.njust.back_end.modules.sys.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import edu.njust.back_end.modules.utils.BaseEntity;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -8,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class MenuEntity implements Serializable {
+public class MenuEntity extends BaseEntity implements Serializable {
 
     private String menuId; // 菜单id
     private String parentId; // 父菜单id，一级菜单为0
@@ -18,8 +19,6 @@ public class MenuEntity implements Serializable {
     private int type; // 类型 (0:目录 1:页面 2:按钮)
     private String icon; // 菜单图标
     private int orderNum; // 排序值
-    private Date createTime; // 创建时间
-    private Date updateTime; // 更新时间
     @TableField(exist = false)
     private List<MenuEntity> children;
 }
