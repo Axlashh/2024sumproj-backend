@@ -23,8 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Slf4j
 @RestController
@@ -126,6 +125,20 @@ public class SysUserController extends AbstractController {
         if (user == null) return R.error();
         List<MenuEntity> menuEntityList = menuService.getMenuListByUserId(user.getUserId());
         return R.ok(menuEntityList);
+    }
+
+    @GetMapping("/getPatientList")
+    public R<?> getPatientList() {
+        Map<String, Object> map = new HashMap<>();
+        List<PatientEntity> patientEntityList = patientDao.selectByMap(map);
+        return R.ok(patientEntityList);
+    }
+
+    @GetMapping("/getDoctorList")
+    public R<?> getDoctorList() {
+        Map<String, Object> map = new HashMap<>();
+        List<DoctorEntity> doctorEntityList = doctorDao.selectByMap(map);
+        return R.ok(doctorEntityList);
     }
 
     @GetMapping("/33")

@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.njust.back_end.modules.mdt.dao.MdtRecordDao">
+    <select id="queryAll" resultType="edu.njust.back_end.modules.mdt.dto.MdtRecordQuery">
+        select *, patient.name as patientName, mdt_group.name as mdtGroupName, doctor.name as applyDoctorName
+        from mdt_record
+        left join patient on mdt_record.patient_id = patient.patient_id
+        left join mdt_group on mdt_record.mdt_group_id = mdt_group.mdt_group_id
+        left join doctor on mdt_record.apply_doctor_id = doctor.doctor_id
+        <where>
+            <if test="mdtRecordId != null and mdtRecordId != ''">
+                and mdt_record_id = #{mdtRecordId}
+            </if>
+            <if test="patientId != null and patientId != ''">
+                and mdt_record.patient_id = #{patientId}
+            </if>
+            <if test="applyDoctorId != null and applyDoctorId != ''">
+                and apply_doctor_id = #{applyDoctorId}
+            </if>
+            <if test="mdtGroupId != null and mdtGroupId != ''">
+                and mdt_record.mdt_group_id = #{mdtGroupId}
+            </if>
+            <if test="patientName != null and patientName != ''">
+                and patient.name like CONCAT('%',#{patientName},'%')
+            </if>
+        </where>
+    </select>
 </mapper>
 

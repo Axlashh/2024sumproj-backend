@@ -16,4 +16,5 @@ public class MdtGroupEntity extends BaseEntity implements Serializable {
     private String mdtMemberIds; // 团队成员的id列表，要求为DoctorEntity的id，用逗号分隔
     private String primaryConditionTreated; // 主治病症
     private String description; // 描述
+    private String name;
 }
