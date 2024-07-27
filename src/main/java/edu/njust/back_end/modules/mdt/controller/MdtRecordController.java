@@ -18,7 +18,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/mdt")
+@RequestMapping("/mdtRecord")
 public class MdtRecordController extends AbstractController {
 
     @Autowired
@@ -49,7 +49,7 @@ public class MdtRecordController extends AbstractController {
         return R.ok();
     }
 
-    @PostMapping("/getMdtRecordList")
+    @PostMapping("/list")
     public R<?> getMdtRecordList(@RequestBody MdtRecordQuery mdtRecordQuery) {
         PageHelper.startPage(mdtRecordQuery.getPage(), mdtRecordQuery.getLimit());
         List<MdtRecordQuery> mdtRecordQueryList = mdtRecordService.queryAll(mdtRecordQuery);
@@ -58,9 +58,7 @@ public class MdtRecordController extends AbstractController {
         return R.ok(pageUtil);
     }
 
-    @GetMapping("/getMdtGroupList")
-    public R<?> getMdtGroupList() {
-        List<MdtGroupEntity> mdtGroupEntityList = mdtGroupDao.selectByMap(new HashMap<>());
-        return R.ok(mdtGroupEntityList);
-    }
+
+
+
 }

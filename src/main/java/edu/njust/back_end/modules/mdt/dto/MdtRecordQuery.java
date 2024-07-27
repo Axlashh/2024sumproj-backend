@@ -17,4 +17,5 @@ public class MdtRecordQuery extends MdtRecordEntity {
     public String patientName;
     public String mdtGroupName;
     public String applyDoctorName;
+    public String mdtFileId;
 }
