@@ -57,8 +57,4 @@ public class MdtRecordController extends AbstractController {
         PageUtils<MdtRecordQuery> pageUtil = new PageUtils<>(page);
         return R.ok(pageUtil);
     }
-
-
-
-
 }

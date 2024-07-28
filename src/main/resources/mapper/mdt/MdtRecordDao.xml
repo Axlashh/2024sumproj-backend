@@ -25,5 +25,37 @@
             </if>
         </where>
     </select>
+
+    <select id="selectById" resultType="edu.njust.back_end.modules.mdt.entity.MdtRecordEntity">
+        select *
+        from mdt_record
+        where mdt_record_id = #{id}
+    </select>
+
+    <update id="updateById" parameterType="map">
+        UPDATE mdt_record
+        <set>
+            <if test="et.patientId != null">
+                patient_id = #{et.patientId},
+            </if>
+            <if test="et.applyDoctorId != null">
+                apply_doctor_id = #{et.applyDoctorId},
+            </if>
+            <if test="et.mdtFileIds != null">
+                mdt_file_ids = #{et.mdtFileIds},
+            </if>
+            <if test="et.mdtMeetingIds != null">
+                mdt_meeting_ids = #{et.mdtMeetingIds},
+            </if>
+            <if test="et.mdtGroupId != null">
+                mdt_group_id = #{et.mdtGroupId},
+            </if>
+            <if test="et.applyReason != null">
+                apply_reason = #{et.applyReason},
+            </if>
+        </set>
+        WHERE
+        mdt_record_id = #{et.mdtRecordId}
+    </update>
 </mapper>
 

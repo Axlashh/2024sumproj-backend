@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.njust.back_end.modules.mdt.dao.MdtMeetingDao">
+    <select id="selectById" resultType="edu.njust.back_end.modules.mdt.entity.MdtMeetingEntity">
+        select *
+        from mdt_meeting
+        where mdt_meeting_id = #{id}
+    </select>
+</mapper>
+
