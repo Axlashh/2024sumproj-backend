@@ -2,11 +2,13 @@ package edu.njust.back_end.modules.sys.entity;
 
 // 表 18 角色用户表 role_user
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
 
 @Data
+@TableName("role_user")
 public class RoleUserEntity implements Serializable {
 
     private String id; // 唯一id

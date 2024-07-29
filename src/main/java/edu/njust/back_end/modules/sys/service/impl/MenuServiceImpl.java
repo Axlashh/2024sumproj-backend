@@ -71,4 +71,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, MenuEntity> implements
 
         return subMenuList;
     }
+
+    public List<MenuEntity> queryAll(MenuEntity menuEntity) {
+        return baseMapper.queryAll(menuEntity);
+    }
 }

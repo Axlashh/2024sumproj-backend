@@ -16,5 +16,73 @@
             )
         order by order_num
     </select>
+
+    <delete id="deleteById">
+        delete
+        from menu
+        where menu_id = #{menuId}
+    </delete>
+
+    <select id="queryAll" resultType="edu.njust.back_end.modules.sys.entity.MenuEntity">
+        SELECT *, parentMenu.name parentName
+        FROM menu
+        left join menu as parentMenu on menu.parent_id = parentMenu.menu_id
+        <where>
+            <if test="menuId != null and menuId != ''">
+                AND menu.menu_id = #{menuId}
+            </if>
+            <if test="parentId != null and parentId != ''">
+                AND menu.parent_id = #{parentId}
+            </if>
+            <if test="name != null and name != ''">
+                AND menu.name = #{name}
+            </if>
+            <if test="url != null and url != ''">
+                AND menu.url like CONCAT(#{url},'%')
+            </if>
+            <if test="perms != null and perms != ''">
+                AND menu.perms = #{perms}
+            </if>
+            <if test="type != null">
+                AND menu.type = #{type}
+            </if>
+            <if test="icon != null and icon != ''">
+                AND menu.icon = #{icon}
+            </if>
+            <if test="orderNum != null">
+                AND menu.order_num = #{orderNum}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateById" parameterType="map">
+        UPDATE menu
+        <set>
+            <if test="et.parentId != null">
+                parent_id = #{et.parentId},
+            </if>
+            <if test="et.name != null">
+                name = #{et.name},
+            </if>
+            <if test="et.url != null">
+                url = #{et.url},
+            </if>
+            <if test="et.perms != null">
+                perms = #{et.perms},
+            </if>
+            <if test="et.type != null">
+                type = #{et.type},
+            </if>
+            <if test="et.icon != null">
+                icon = #{et.icon},
+            </if>
+            <if test="et.orderNum != null">
+                order_num = #{et.orderNum},
+            </if>
+        </set>
+        WHERE
+        menu_id = #{et.menuId}
+    </update>
+
 </mapper>
 
