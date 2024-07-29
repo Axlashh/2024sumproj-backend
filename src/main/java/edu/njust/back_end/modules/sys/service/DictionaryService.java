@@ -6,6 +6,6 @@ import edu.njust.back_end.modules.sys.entity.DictionaryEntity;
 import java.util.List;
 
 public interface DictionaryService extends IService<DictionaryEntity> {
-    List<DictionaryEntity> getAllDictionaries();
+    public List<DictionaryEntity> queryAll(DictionaryEntity dictionaryEntity);
 
 }

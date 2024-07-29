@@ -15,6 +15,6 @@ public class DictionaryEntity extends BaseEntity implements Serializable {
     String type;
     Integer code;
     String value;
-    Integer order_num;
+    Integer orderNum;
     String remark;
 }

@@ -31,7 +31,7 @@ public class SetTimeAspect {
         entity.setUpdateTime(currentDate);
     }
 
-    @Before("createPointCut()")
+    @Before("updatePointCut()")
     public void updateUpdateTime(JoinPoint joinPoint) throws Throwable{
         Object[] args = joinPoint.getArgs();
         BaseEntity entity = (BaseEntity) args[0];

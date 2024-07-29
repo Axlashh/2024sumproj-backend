@@ -11,9 +11,9 @@ import java.util.List;
 @Service
 public class DictionaryServiceImpl extends ServiceImpl<DictionaryDao, DictionaryEntity> implements DictionaryService {
     @Autowired
-private DictionaryDao dictionaryDao;
+    DictionaryDao dictionaryDao;
 
-    public List<DictionaryEntity> getAllDictionaries() {
-        return dictionaryDao.selectList(null); // 查询所有数据
+    public List<DictionaryEntity> queryAll(DictionaryEntity dictionaryEntity) {
+        return baseMapper.queryAll(dictionaryEntity);
     }
 }
